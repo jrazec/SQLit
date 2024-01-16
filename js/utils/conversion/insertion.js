@@ -1,5 +1,5 @@
 /* import initializeInsertion from "/conversion/insertion" */
-const attributeCount = 5; // This IS an input, automatically determine the count of att
+
 
 /*            o Information o
     - There are 3 common data types in sql which are
@@ -27,6 +27,29 @@ const attributeCount = 5; // This IS an input, automatically determine the count
     - there, proceed to the checking--if else, base on the user input, is it
     part of the quotation or is it not quoted - using of for loop
     - trying the filelist on the sheet.csv if it the logic would work 
-    
 */
 
+const csvFormat = `\`yearlevelcode\`, \`feeid\`, \`fee_category\`, \`fee_name\`, \`fee_amount\`, \`fee_paymentdate\`, \`schoolyeartype\`
+John,13,M,123,,,
+Jerome,14,M,124,1-2-2023,,,
+Girl,12,F,125,1-3-2023,,,
+Boy,,M,126,1-1-2023,,,
+`;
+
+
+function initializeInsertion() {
+    const attributeCount = checkAttributeCount(csvFormat); // checks the attribute count, returns the value then stores to the attribute count variable
+    console.log(attributeCount)
+}
+
+
+
+function checkAttributeCount(convertedCsv){
+    let arrAttribute = convertedCsv.replace("\n","\r\a\z\e\c").split("\r\a\z\e\c"); // the first \n will only be read, this will be an array with only 2 parts
+    let topAttribute = arrAttribute[0]; // This contains the top attributes, which MUST NOT CONTAIN , since in sql--comma shouldn't be used as naming convention | if there is, a problem would occur in this code.
+    let topArrAttribute = topAttribute.split(",");
+    return topArrAttribute.length
+}
+
+// This would be removed once it is already in selection_dd
+initializeInsertion();
