@@ -1,0 +1,6 @@
+table_1,table_2,table_3
+name,school_id,id
+age,address,house
+sex,course,address
+number,,school_id 
+birthday,,
