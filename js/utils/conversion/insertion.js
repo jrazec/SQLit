@@ -45,10 +45,10 @@ function initializeInsertion() {
 
 
 function checkAttributeCount(convertedCsv){
-    let arrAttribute = convertedCsv.replace("\n","\r\a\z\e\c").split("\r\a\z\e\c"); // the first \n will only be read, this will be an array with only 2 parts
-    let topAttribute = arrAttribute[0]; // This contains the top attributes, which MUST NOT CONTAIN , since in sql--comma shouldn't be used as naming convention | if there is, a problem would occur in this code.
-    let topArrAttribute = topAttribute.split(",");
-    return topArrAttribute.length
+    let arrayValues= convertedCsv.replace("\n","\r\a\z\e\c").split("\r\a\z\e\c"); // the first \n will only be read, this will be an array with only 2 parts
+    return arrayValues[0].split(",").length; 
+    // split returns array, so the top attributes which is at index 0,
+    // will be an array aswell
 }
 
 // This would be removed once it is already in selection_dd
