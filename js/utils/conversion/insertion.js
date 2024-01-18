@@ -28,28 +28,27 @@
     part of the quotation or is it not quoted - using of for loop
     - trying the filelist on the sheet.csv if it the logic would work 
 */
+// MySQL only
+const determiner = {
+    withQuotes: ["CHAR","VARCHAR","BINARY","VARBINARY","TEXT","MEDIUMTEXT","LONGTEXT","DATE","DATETIME","TIMESTAMP","TIME","YEAR"],
+    wOutQuotes: ["INT","BIGINT","DOUBLE","DECIMAL","BOOL","BIT"]
+}; 
 
-const csvFormat = `\`yearlevelcode\`, \`feeid\`, \`fee_category\`, \`fee_name\`, \`fee_amount\`, \`fee_paymentdate\`, \`schoolyeartype\`
-John,13,M,123,,,
-Jerome,14,M,124,1-2-2023,,,
-Girl,12,F,125,1-3-2023,,,
-Boy,,M,126,1-1-2023,,,
-`;
+`
+INSERT INTO 
+    table_1($ {attributes})
+VALUES
+    ({Values}),
 
+    ...
+    ({Values});
+`
 
-function initializeInsertion() {
-    const attributeCount = checkAttributeCount(csvFormat); // checks the attribute count, returns the value then stores to the attribute count variable
-    console.log(attributeCount)
+function initializeInsertion(values,prompt) {
+    
 }
 
 
-
-function checkAttributeCount(convertedCsv){
-    let arrayValues= convertedCsv.replace("\n","\r\a\z\e\c").split("\r\a\z\e\c"); // the first \n will only be read, this will be an array with only 2 parts
-    return arrayValues[0].split(",").length; 
-    // split returns array, so the top attributes which is at index 0,
-    // will be an array aswell
-}
 
 // This would be removed once it is already in selection_dd
 initializeInsertion();
