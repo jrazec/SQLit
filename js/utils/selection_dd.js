@@ -1,26 +1,30 @@
 /* import initializeDropdownSelection from "/utils/selection_dd" */
-
+import convInsertion from "./conversion/insertion.js";
 // import initializeCreation from "/conversion/creation" 
 // import initializeInsertion from "/conversion/insertion" 
 
 // NOTE: the conversion part will be included here..
 
-const csvFormat = `yearlevelcode, feeid, fee_category, fee_name, fee_amount, fee_paymentdate, schoolyeartype
+const csv = `yearlevelcode, feeid, fee_category, fee_name, fee_amount, fee_paymentdate, schoolyeartype
 John,13,M,123,,,
 Jerome,14,M,124,1-2-2023,,
 Girl,12,F,125,1-3-2023,,
 Boy,,M,126,1-1-2023,,
 `;
 
+const insWithQuotation = "";//user input for valuesIns.withQuotation
+const tblName = "";//user input for valuesIns.tblName
+
 // let prompt = ""
-function initializeSelection(){
+export default function initializeSelection(){
     // event listener to drop down
     // if INSERT Values
+        let csvFormat = csv.replace(/\n$/gm,""); // removing newline in the last($) 
         const attributeCount = checkAttributeCount(csvFormat)
-        // const values = convValuestoObj(attributeCount,csv)
-        // convertInsertion(values,prompt);
+        const values = convValuesToObj(attributeCount,csvFormat)
+        const result = convInsertion(values);
 
-        console.log(convValuestoObj(attributeCount,csvFormat))
+        console.log(result);
 
     // else if CREATE table
         // const tableCount = checkTableCount(csv) 
@@ -28,12 +32,13 @@ function initializeSelection(){
         //
     // else no selection
 }
-
-function convValuestoObj(attributeCount,csv) {
+initializeSelection()
+function convValuesToObj(attributeCount,csv) {
     let valuesIns = {
+        tblName : ["table_1"], // user input
         att : [],
         val : [],
-            
+        withQuotation : [true,true,true,false,true,false,false]// user input
     }
 
     let arrValue = csv.replace("\n","\r\a\z\e\c").split("\r\a\z\e\c");
@@ -56,8 +61,9 @@ function convValuestoObj(attributeCount,csv) {
 
 function checkAttributeCount(convertedCsv){
     let arrayValues= convertedCsv.replace("\n","\r\a\z\e\c").split("\r\a\z\e\c"); // the first \n will only be read, this will be an array with only 2 parts
-    return arrayValues[0].split(",").length; 
-    // split returns array, so the top attributes which is at index 0,
-    // will be an array aswell
+    return arrayValues[0].split(",").length;// split returns array, so the top attributes which is at index 0, will be an array aswell
 }
-initializeSelection()
+
+export {
+    convValuesToObj, checkAttributeCount
+}
